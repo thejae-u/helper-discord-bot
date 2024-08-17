@@ -3,6 +3,8 @@ import json
 import discord
 import random
 import math
+import Data as dt
+from notion_client import Client
 
 # check latency
 async def ping(message, client):
@@ -112,6 +114,45 @@ async def pick_member(message):
     embed.add_field(name= 'Congratulations!', value= send_text)
     await message.channel.send(embed=embed)
 
+notion = Client(auth=dt.NOTION_API_KEY)
+
+async def read_database(message):
+    result = query_database(dt.NOTION_DATABASE_ID)
+
+    schedules = []
+    embed = discord.Embed(title='최근 5개 일정')
+    if result:
+        for page in result:
+            properties = page.get('properties', {})
+            date_property = properties.get('날짜', {}).get('date', {})
+            name = properties.get('이름', {}).get('title', {})
+            name = name[0].get('text', {}).get('content', '')
+
+            if date_property:
+                start_date = date_property.get('start')
+                end_date = date_property.get('end')
+            schedules.append([name, start_date, end_date])
+        
+        count = 0
+        for schedule in schedules:
+            if count == 5:
+                break
+            if schedule[2]:
+                embed.add_field(name=schedule[0], value=f'{schedule[1]} ~ {schedule[2]}', inline=False)
+            else:
+                embed.add_field(name=schedule[0], value=f'{schedule[1]}')
+            count += 1
+        await message.channel.send(embed=embed)
+    else:
+        print(f'none')
+    
+def query_database(database_id):
+    try:
+        response = notion.databases.query(database_id=database_id)
+        return response.get('results', [])
+    except Exception as e:
+        print(f'Error : {e}')
+        return None
 
 def is_inteager(s):
     try:

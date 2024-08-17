@@ -45,6 +45,9 @@ class HelperBot(discord.Client):
         if 'pick' in msg:
             await le.pick_member(message)
             return
+        
+        if msg == '일정':
+            await le.read_database(message)
         # Answer Logic End
             
     # On Message End

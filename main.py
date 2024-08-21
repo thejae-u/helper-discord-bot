@@ -17,28 +17,38 @@ class HelperBot(discord.Client):
         if message.author == self.user:
             return
         
+        # ignore sticker
         if message.stickers:
             return
 
+        # ignore image or file
+        if message.attachments:
+            return
+
+        # ignore no prefix message
         prefix = message.content[0]
         if prefix != dt.PREFIX:
             return
         
-        # Message has blank
+        # ignore no message after prefix
         msg = message.content[1:]
         if msg == '':
             return
 
         # Answer Logic Begin
+        if msg == 'help' or msg == '도움말':
+            await le.help(message, self)
+            return
+
         if msg == 'ping' or msg == '핑':
             await le.ping(message, self)
             return
         
-        if msg == 'vote':
+        if msg == 'vote' or msg == '투표':
             await le.pn_vote(message)
             return
 
-        if msg == 'team':
+        if msg == 'team' or msg == '팀':
             await le.make_team(message, self)
             return
         

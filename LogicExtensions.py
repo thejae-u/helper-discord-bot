@@ -4,23 +4,28 @@ import discord
 import random
 import math
 import Data as dt
+import Help as hp
 from notion_client import Client
 
-# check latency
+# check latency Begin
 async def ping(message, client):
     latency = client.latency * 1000
     txt = str(round(latency, 3)) + ' ms'
     embed = discord.Embed(title='Pong!', description=txt)
     await message.reply(embed=embed)
 
-# vote positive or negative
+# check latency End
+
+# vote positive or negative Begin
 async def pn_vote(message):
     embed = discord.Embed(title='찬반 투표', description='원하는 곳에 투표하세요')
     msg = await message.channel.send(embed=embed)
     await msg.add_reaction('✅')
     await msg.add_reaction('❌')
+
+# vote positive or negative End
     
-# voice channel team made (only 2 team)
+# voice channel team made (only 2 team) Begin
 async def make_team(message, client):
     if message.author.voice and message.author.voice.channel:
         voice_channel = message.author.voice.channel
@@ -69,8 +74,10 @@ async def make_team(message, client):
             await message.channel.send('No Members in voice channel')
     else:
         await message.channel.send('you are not in voice channel')
+
+# voice channel team made (only 2 team) End
    
-# member draw lots
+# member draw lots Begin
 async def pick_member(message):
     if not message.author.voice and not message.author.voice.channel:
         await message.reply('you are not in voice channel')
@@ -114,6 +121,24 @@ async def pick_member(message):
     embed.add_field(name= 'Congratulations!', value= send_text)
     await message.channel.send(embed=embed)
 
+# member draw lots End
+
+# help Message Begin
+async def help(message, client):
+    embed = discord.Embed(title='How to Use')
+    
+    hp.ping(embed)
+    hp.vote(embed)
+    hp.team(embed)
+    hp.pick(embed)
+
+    dm = await message.author.create_dm()
+    await dm.send(embed=embed)
+
+# help Message End
+
+
+# Notion Schedule Begin
 notion = Client(auth=dt.NOTION_API_KEY)
 
 async def read_database(message):
@@ -153,6 +178,8 @@ def query_database(database_id):
     except Exception as e:
         print(f'Error : {e}')
         return None
+
+# notion Schedule End
 
 def is_inteager(s):
     try:

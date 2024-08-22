@@ -140,14 +140,8 @@ async def help(message, client):
 
 # pin Begin
 async def pin(message):
-    str = message.content.split(' ')
-    pin_message = ''
-    for i in str:
-        if '!' in i:
-            continue
-        pin_message += i
-    print(pin_message)
-    send_message = f'메시지 고정 : {pin_message}\n요청자 : {message.author.mention}'
+    str = message.content.split(' ', 1)[1]
+    send_message = f'메시지 고정 : {str}\n요청자 : {message.author.mention}'
     sent_message = await message.channel.send(send_message)
     await sent_message.pin() 
 

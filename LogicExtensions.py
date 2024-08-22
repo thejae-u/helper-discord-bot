@@ -128,6 +128,7 @@ async def help(message, client):
     embed = discord.Embed(title='How to Use')
     
     hp.ping(embed)
+    hp.pin(embed)
     hp.vote(embed)
     hp.team(embed)
     hp.pick(embed)

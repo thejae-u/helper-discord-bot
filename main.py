@@ -26,8 +26,7 @@ class HelperBot(discord.Client):
             return
 
         # ignore no prefix message
-        prefix = message.content[0]
-        if prefix != dt.PREFIX:
+        if not message.content.startswith('!'):
             return
         
         # ignore no message after prefix
@@ -44,7 +43,7 @@ class HelperBot(discord.Client):
             await le.ping(message, self)
             return
 
-        if msg == 'pin' or '고정':
+        if 'pin' in msg or '고정' in msg:
             await le.pin(message)
             return
         
@@ -62,6 +61,7 @@ class HelperBot(discord.Client):
         
         if msg == '일정':
             await le.read_database(message)
+            return
         # Answer Logic End
             
     # On Message End

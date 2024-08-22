@@ -6,6 +6,11 @@ def ping(embed:discord.Embed):
                     inline=False)
     return embed
 
+def pin(embed:discord.Embed):
+    embed.add_field(name='!pin or !고정',
+                    value='메시지를 고정 할 수 있습니다\n사용방벙 : !pin (고정할 메시지)',
+                    inline=False)
+
 def vote(embed:discord.Embed):
     embed.add_field(name='!vote or !투표',
                     value='찬반 투표를 할 수 있습니다',

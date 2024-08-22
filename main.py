@@ -43,6 +43,10 @@ class HelperBot(discord.Client):
         if msg == 'ping' or msg == '핑':
             await le.ping(message, self)
             return
+
+        if msg == 'pin' or '고정':
+            await le.pin(message)
+            return
         
         if msg == 'vote' or msg == '투표':
             await le.pn_vote(message)

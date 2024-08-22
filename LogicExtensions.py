@@ -137,6 +137,15 @@ async def help(message, client):
 
 # help Message End
 
+# pin Begin
+async def pin(message):
+    str = message.content.split(' ')
+    pin_message = f'메시지 고정 : {str[1]}\n요청자 : {message.author.mention}'
+    sent_message = await message.channel.send(pin_message)
+    await sent_message.pin() 
+
+# pin End
+
 
 # Notion Schedule Begin
 notion = Client(auth=dt.NOTION_API_KEY)

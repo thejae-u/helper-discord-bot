@@ -142,6 +142,7 @@ async def help(message, client):
 async def pin(message):
     str = message.content.split(' ', 1)[1]
     send_message = f'메시지 고정 : {str}\n요청자 : {message.author.mention}'
+    await message.delete()
     sent_message = await message.channel.send(send_message)
     await sent_message.pin() 
 

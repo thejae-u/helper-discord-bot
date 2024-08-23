@@ -44,7 +44,6 @@ async def make_team(message, client):
             team1 = []
             team2 = []
             count = len(member_info)
-            print(count)
 
             for i in range(0, math.ceil(count / 2)):
                 team1.append(member_info[i])

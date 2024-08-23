@@ -76,6 +76,25 @@ async def make_team(message, client):
         await message.channel.send('you are not in voice channel')
 
 # voice channel team made (only 2 team) End
+
+async def count_voice_member(message):
+    if not message.author.voice and not message.author.voice.channel:
+        await message.reply('you are not in voice channel')
+    
+    voice_channel = message.author.voice.channel
+    members = voice_channel.members
+
+    if not members:
+        await message.reply('no members in voice channel')
+        return
+    members_info = []
+    for member in members:
+        if member.bot:
+            continue
+        members_info.append(member)
+    
+    await message.reply(f'현재 {len(members_info)}명이 {voice_channel.name}에 있습니다.')
+    return
    
 # member draw lots Begin
 async def pick_member(message):

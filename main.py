@@ -51,6 +51,10 @@ class HelperBot(discord.Client):
             await le.pn_vote(message)
             return
 
+        if msg == 'count' or msg == '몇명':
+            await le.count_voice_member(message)
+            return
+
         if msg == 'team' or msg == '팀':
             await le.make_team(message, self)
             return

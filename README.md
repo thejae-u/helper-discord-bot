@@ -2,7 +2,7 @@
 
 - DEV interpreter versrion : **python 3.10.11**
 
-### Essentia
+### Essential
 - pip install
   - discord
   - notion-client

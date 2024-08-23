@@ -148,6 +148,7 @@ async def help(message, client):
     hp.ping(embed)
     hp.pin(embed)
     hp.vote(embed)
+    hp.count(embed)
     hp.team(embed)
     hp.pick(embed)
 

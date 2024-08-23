@@ -28,3 +28,9 @@ def pick(embed:discord.Embed):
                     value='!pick (인원수) 를 입력하면 음성 채널에 있는 인원 중 인원 수 만큼 뽑습니다 (봇 제외)',
                     inline=False)
     return embed
+
+def count(embed:discord.Embed):
+    embed.add_field(name='!count or !몇명',
+                    value='현재 참여한 음성 채널에 있는 인원 수를 알려줍니다. (봇 제외)',
+                    inline=False)
+    return embed

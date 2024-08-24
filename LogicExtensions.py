@@ -28,7 +28,7 @@ async def pn_vote(message):
     
 # voice channel team made (only 2 team) Begin
 async def make_team(message, client):
-    if not message.author.voice and message.author.voice.channel:
+    if not message.author.voice or not message.author.voice.channel:
         await message.reply('you are not in voice channel')
         return
     voice_channel = message.author.voice.channel
@@ -84,7 +84,7 @@ async def make_team(message, client):
 # voice channel team made (only 2 team) End
 
 async def count_voice_member(message):
-    if not message.author.voice and not message.author.voice.channel:
+    if not message.author.voice or not message.author.voice.channel:
         await message.reply('you are not in voice channel')
         return
     
@@ -105,7 +105,7 @@ async def count_voice_member(message):
    
 # member draw lots Begin
 async def pick_member(message):
-    if not message.author.voice and not message.author.voice.channel:
+    if not message.author.voice or not message.author.voice.channel:
         await message.reply('you are not in voice channel')
         return
 

@@ -122,6 +122,11 @@ async def pick_member(message):
         return
 
     pick_count = int(pick_count[1])
+
+    if(pick_count < 1):
+        await message.reply('invalid parameter value (out of range)')
+        return
+
     members_info = []
     for member in members:
         if member.bot:

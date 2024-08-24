@@ -28,58 +28,65 @@ async def pn_vote(message):
     
 # voice channel team made (only 2 team) Begin
 async def make_team(message, client):
-    if message.author.voice and message.author.voice.channel:
-        voice_channel = message.author.voice.channel
-        members = voice_channel.members
+    if not message.author.voice and message.author.voice.channel:
+        await message.reply('you are not in voice channel')
+        return
+    voice_channel = message.author.voice.channel
+    members = voice_channel.members
         
-        if members:
-            member_info = []
-            for member in members:
-                if member.bot:
-                    continue
-                member_info.append(member.id)
+    if not members:
+        await message.reply('no member in voce channel')
+        return
+    
+    member_info = []
+    for member in members:
+        if member.bot:
+            continue
+        member_info.append(member.id)
+    
+    if len(member_info) <= 1:
+        await message.reply('not enough members')
+        return
             
-            for i in range(random.randrange(0, 10)): 
-                random.shuffle(member_info)
+    for i in range(random.randrange(0, 10)): 
+        random.shuffle(member_info)
             
-            team1 = []
-            team2 = []
-            count = len(member_info)
+    team1 = []
+    team2 = []
+    count = len(member_info)
 
-            for i in range(0, math.ceil(count / 2)):
-                team1.append(member_info[i])
+    for i in range(0, math.ceil(count / 2)):
+        team1.append(member_info[i])
             
-            for i in range(math.ceil(count / 2), count):
-                team2.append(member_info[i])
+    for i in range(math.ceil(count / 2), count):
+        team2.append(member_info[i])
             
-            embed = discord.Embed(title= 'Result')
+    embed = discord.Embed(title= 'Result')
             
-            team1_result = ''
-            team2_result = ''
-            count = 1
-            for member in team1:
-                team1_result += f'{count} : <@{member}>\n'
-                count += 1
+    team1_result = ''
+    team2_result = ''
+    count = 1
+    for member in team1:
+        team1_result += f'{count} : <@{member}>\n'
+        count += 1
 
-            count = 1
-            for member in team2:
-                team2_result += f'{count} : <@{member}>\n'
-                count += 1
+    count = 1
+    for member in team2:
+        team2_result += f'{count} : <@{member}>\n'
+        count += 1
                 
 
-            embed.add_field(name='team 1', value= team1_result)
-            embed.add_field(name='team 2', value= team2_result, inline=False)
-            await message.channel.send(embed=embed)
-        else:
-            await message.channel.send('No Members in voice channel')
-    else:
-        await message.channel.send('you are not in voice channel')
+    embed.add_field(name='team 1', value= team1_result)
+    embed.add_field(name='team 2', value= team2_result, inline=False)
+    await message.channel.send(embed=embed)
+    return
 
 # voice channel team made (only 2 team) End
 
 async def count_voice_member(message):
     if not message.author.voice and not message.author.voice.channel:
         await message.reply('you are not in voice channel')
+        return
     
     voice_channel = message.author.voice.channel
     members = voice_channel.members

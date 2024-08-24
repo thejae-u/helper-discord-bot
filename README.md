@@ -7,7 +7,7 @@
   - discord
   - notion-client
   - requests
-
+  - qrcode
 - Data.py
   - must-have api key
     - TOKEN : discord bot token

@@ -3,6 +3,7 @@ import json
 import discord
 import random
 import math
+import qrcode
 import Data as dt
 import Help as hp
 from notion_client import Client
@@ -210,6 +211,14 @@ def query_database(database_id):
         return None
 
 # notion Schedule End
+
+# make qr Begin
+async def make_qr(message):
+    img = qrcode.make('https://www.naver.com/')
+    img.save('qr_images/qr_image.png')
+    return
+
+# make qr End
 
 def is_inteager(s):
     try:

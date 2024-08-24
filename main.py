@@ -71,9 +71,16 @@ class HelperBot(discord.Client):
             await le.pick_member(message)
             return
         
+        # for personal
         if msg == '일정':
             Log(message, 'cal')
             await le.read_database(message)
+            return
+        
+        # not work
+        if msg == 'qr':
+            Log(message, 'qr')
+            await le.make_qr(message)
             return
         # Answer Logic End
             

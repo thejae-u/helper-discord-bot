@@ -1,14 +1,14 @@
 from datetime import datetime
-async def Log(message, func_name):
-    current_time = datetime.now()
-    log_message = f'[{current_time}] {message.author.name} {func_name} Executed\n'
-    print(log_message)
-    await write_log(log_message)
+async def Log(message, log_message):
+    current_time = datetime.now().strftime('%y/%m/%d %H:%M:%S')
+    save_log = f'[{current_time}] @{message.author.id} {log_message}\n'
+    print(save_log)
+    await write_log(save_log)
     return
 
 async def write_log(log):
     try:
-        f = open(file='Log/log', mode='a')
+        f = open(file='Log/user-log.log', mode='a')
         f.write(log)
     except Exception as e:
         print(e)

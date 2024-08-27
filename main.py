@@ -1,7 +1,6 @@
 import discord
 import Data as dt
 import LogicExtensions as le
-from Log import Log
  
 # Need Bot Token and Text channel ID
 TOKEN = dt.TOKEN
@@ -37,49 +36,40 @@ class HelperBot(discord.Client):
 
         # Answer Logic Begin
         if msg == 'help' or msg == '도움말':
-            await Log(message, 'help')
             await le.help(message, self)
             return
 
         if msg == 'ping' or msg == '핑':
-            await Log(message, 'ping')
             await le.ping(message, self)
             return
 
         if 'pin' in msg or '고정' in msg:
-            await Log(message, 'pin')
             await le.pin(message)
             return
         
         if msg == 'vote' or msg == '투표':
-            await Log(message, 'vote')
             await le.pn_vote(message)
             return
 
         if msg == 'count' or msg == '몇명':
-            await Log(message, 'count')
             await le.count_voice_member(message)
             return
 
         if msg == 'team' or msg == '팀':
-            await Log(message, 'team')
             await le.make_team(message, self)
             return
         
         if 'pick' in msg:
-            await Log(message, 'pick')
             await le.pick_member(message)
             return
         
         # for personal
         if msg == '일정':
-            await Log(message, 'cal')
             await le.read_database(message)
             return
         
         # not work
         if 'qr' in msg:
-            await Log(message, 'qr')
             await le.make_qr(message)
             return
         # Answer Logic End

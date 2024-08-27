@@ -78,7 +78,7 @@ class HelperBot(discord.Client):
             return
         
         # not work
-        if msg == 'qr':
+        if 'qr' in msg:
             await Log(message, 'qr')
             await le.make_qr(message)
             return

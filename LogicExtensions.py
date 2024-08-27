@@ -226,8 +226,15 @@ def query_database(database_id):
 
 # make qr Begin
 async def make_qr(message):
-    img = qrcode.make('https://www.naver.com/')
-    img.save('qr_images/qr_image.png')
+    if not message.content:
+        await message.reply('invalid message')
+        return
+    
+    before_qr = message.content.split(maxsplit=1)[1]
+    img = qrcode.make(before_qr)
+    img.save('qr_image/qrcode.png')
+    img_file = discord.File('qr_image/qrcode.png', filename='send_image.png')
+    await message.reply(file=img_file)
     return
 
 # make qr End

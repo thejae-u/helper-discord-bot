@@ -28,11 +28,14 @@ class HelperBot(discord.Client):
         # ignore no prefix message
         if not message.content.startswith('!'):
             return
-        
+
         # ignore no message after prefix
         msg = message.content[1:]
         if msg == '':
             return
+
+        # only Command
+        msg = msg.split(' ', 1)[0]
 
         # Answer Logic Begin
         if msg == 'help' or msg == '도움말':
@@ -42,8 +45,8 @@ class HelperBot(discord.Client):
         if msg == 'ping' or msg == '핑':
             await le.ping(message, self)
             return
-
-        if 'pin' in msg or '고정' in msg:
+        
+        if msg == 'pin' or msg == '고정':
             await le.pin(message)
             return
         
@@ -59,7 +62,7 @@ class HelperBot(discord.Client):
             await le.make_team(message, self)
             return
         
-        if 'pick' in msg:
+        if msg == 'pick' or msg == '선택':
             await le.pick_member(message)
             return
         
@@ -69,7 +72,7 @@ class HelperBot(discord.Client):
             return
         
         # not work
-        if 'qr' in msg:
+        if msg == 'qr':
             await le.make_qr(message)
             return
         # Answer Logic End

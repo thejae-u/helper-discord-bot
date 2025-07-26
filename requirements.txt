@@ -1,4 +1,5 @@
 requests
 discord
+Pillow
 qrcode
 notion_client
